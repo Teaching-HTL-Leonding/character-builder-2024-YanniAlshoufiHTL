@@ -1,0 +1,53 @@
+<div class="grid">
+  <form (submit)="onBuildImage()">
+    <div>
+      <label for="eye-select">Eye</label>
+      <select id="eye-select" [(ngModel)]="eyeType" name="eye-select">
+        @for (eyeOption of eyeOptions; track $index) {
+        <option value="{{ eyeOption }}">{{ eyeOption }}</option>
+        }
+      </select>
+    </div>
+
+    <label>
+      <input type="checkbox" [(ngModel)]="hasHammer" name="hasHammer" />
+      Has Hammer
+    </label>
+
+    <div>
+      <label for="mouth-select">Mouth</label>
+      <select id="mouth-select" [(ngModel)]="mouthType" name="mouth-select">
+        @for (mouthOption of mouthOptions; track $index) {
+        <option value="{{ mouthOption }}">{{ mouthOption }}</option>
+        }
+      </select>
+    </div>
+
+    <div>
+      <label for="right-hand-select">Mouth</label>
+      <select
+        id="right-hand-select"
+        [(ngModel)]="rightHandType"
+        name="right-hand-select"
+      >
+        @for (rightHandOption of rightHandOptions; track $index) {
+        <option value="{{ rightHandOption }}">{{ rightHandOption }}</option>
+        }
+      </select>
+    </div>
+
+    <label>
+      <input type="checkbox" [(ngModel)]="hasTail" name="hasTail" />
+      Has Tail
+    </label>
+
+    <div class="grid">
+      <button (click)="onBuildImage()">Build Image</button>
+      <button (click)="onFeelingLucky()">Feeling Lucky</button>
+    </div>
+  </form>
+
+  <div>
+    <img src="{{ currentImageLink() }}" alt="Character Image" />
+  </div>
+</div>

@@ -1,0 +1,8 @@
+.randomizer-image {
+  width: 70%;
+}
+
+.randomizer-image-container {
+  display: flex;
+  justify-content: center;
+}

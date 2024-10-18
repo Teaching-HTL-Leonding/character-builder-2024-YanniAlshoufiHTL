@@ -1,0 +1,13 @@
+<div>
+  <article>
+    <div class="grid">
+      <button (click)="onZoomIn()">+</button>
+      <button (click)="onZoomOut()">-</button>
+      <button (click)="onNext()">Next</button>
+    </div>
+  </article>
+
+  <article class="randomizer-image-container">
+    <img class="randomizer-image" src="{{ currentImageLink() }}" alt="" />
+  </article>
+</div>
