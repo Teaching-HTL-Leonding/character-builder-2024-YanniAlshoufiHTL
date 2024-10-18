@@ -1,4 +1,4 @@
-import { Component, effect, inject, signal } from '@angular/core';
+import { Component, effect, inject, OnInit, signal } from '@angular/core';
 import {
   CharacterApiService,
   EyeOption,
@@ -17,7 +17,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './build-page.component.html',
   styleUrl: './build-page.component.css',
 })
-export class BuildPageComponent {
+export class BuildPageComponent implements OnInit {
   private readonly characterApiService = inject(CharacterApiService);
 
   protected currentImageLink = signal('');
@@ -32,6 +32,10 @@ export class BuildPageComponent {
   hasHammer = signal(false);
   hasTail = signal(false);
 
+  async ngOnInit() {
+    await this.onFeelingLucky();
+  }
+
   async onBuildImage() {
     const { url } = await this.characterApiService.buildImage(
       this.eyeType(),
@@ -44,7 +48,16 @@ export class BuildPageComponent {
     this.currentImageLink.set(url);
   }
 
-  onFeelingLucky() {
-    throw new Error('Not implemented.');
+  async onFeelingLucky() {
+    const { imageOptions, url } =
+      await this.characterApiService.getRandomImage();
+
+    this.eyeType.set(imageOptions.eye);
+    this.mouthType.set(imageOptions.mouth);
+    this.rightHandType.set(imageOptions.rightHand);
+    this.hasHammer.set(imageOptions.hasHammer);
+    this.hasTail.set(imageOptions.hasTail);
+
+    this.currentImageLink.set(url);
   }
 }
